@@ -11,7 +11,6 @@ import com.eazybytes.accounts.repository.CustomerRepository;
 import com.eazybytes.accounts.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.LocaleResolver;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -21,7 +20,6 @@ import java.util.Random;
 @AllArgsConstructor
 public class AccountsServiceImpl implements IAccountsService {
 
-    private final LocaleResolver localeResolver;
     private AccountsRepository accountsRepository;
     private CustomerRepository customerRepository;
 
@@ -30,9 +28,10 @@ public class AccountsServiceImpl implements IAccountsService {
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
         Optional<Customer> optionalCustomer = customerRepository.findByMobileNumber(customer.getMobileNumber());
         if (optionalCustomer.isPresent()) {
-            throw new CustomerAlreadyExistsException("Já existe um usuário com esse número de telefone "
-                    + customerDto.getMobileNumber());
+            throw new CustomerAlreadyExistsException("Já existe um usuário com esse número de telefone " + customerDto.getMobileNumber());
         }
+        customer.setCreatedBy("Anonymous");
+        customer.setCreatedAt(LocalDateTime.now());
         Customer savedCostumer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCostumer));
     }

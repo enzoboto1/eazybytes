@@ -20,11 +20,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 public class BaseEntity {
 
     @CreatedDate
-    @Column(name = "created_at", updatable = false, nullable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @CreatedBy
-    @Column(name = "created_by", updatable = false, nullable = false, length = 20)
+    @Column(name = "created_by", updatable = false, length = 20)
     private String createdBy;
 
     @LastModifiedDate
