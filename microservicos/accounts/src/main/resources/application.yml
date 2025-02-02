@@ -20,3 +20,7 @@ logging:
   level:
     org:
       hibernate: DEBUG
+      SQL: DEBUG
+      type:
+        descriptor:
+          sql: TRACE
