@@ -1,7 +1,6 @@
 package com.eazybytes.accounts.service;
 
 import com.eazybytes.accounts.dto.CustomerDto;
-import jakarta.validation.Valid;
 
 public interface IAccountsService {
 
@@ -9,7 +8,7 @@ public interface IAccountsService {
 
     CustomerDto fetchAccount(String mobileNumber);
 
-    boolean updateAccount( CustomerDto customerDto);
+    boolean updateAccount(CustomerDto customerDto);
 
     boolean deleteAccount(String mobileNumber);
 
